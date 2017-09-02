@@ -19,15 +19,15 @@
 ![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart.jpg "在这里输入图片标题")
 
 因此，
-![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart%20(1).jpg "在这里输入图片标题")
+![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart1.jpg "在这里输入图片标题")
 
 同理
-![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart%20(2).jpg "在这里输入图片标题")
+![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart2.jpg "在这里输入图片标题")
 
 所以
-![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart%20(3).jpg "在这里输入图片标题")
+![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart3.jpg "在这里输入图片标题")
 
 即
-![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart%20(5).jpg "在这里输入图片标题")
+![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart5.jpg "在这里输入图片标题")
 
 这就是条件概率的计算公式
