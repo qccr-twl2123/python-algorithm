@@ -14,3 +14,20 @@
 
 ![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/bg2011082502.jpg "在这里输入图片标题")
 
+根据文氏图，可以很清楚地看到在事件B发生的情况下，事件A发生的概率就是P(A∩B)除以P(B)。
+
+![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart.jpg "在这里输入图片标题")
+
+因此，
+![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart(1).jpg "在这里输入图片标题")
+
+同理
+![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart(2).jpg "在这里输入图片标题")
+
+所以
+![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart(3).jpg "在这里输入图片标题")
+
+即
+![输入图片说明](https://github.com/qccr-twl2123/python-algorithm/blob/master/resources/chart(4).jpg "在这里输入图片标题")
+
+这就是条件概率的计算公式
