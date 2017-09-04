@@ -3,6 +3,7 @@
 import re
 import collections
 import numpy as np
+import matplotlib.pyplot as plt
 
 def get_doc_vector(words,vocabulary):
     doc_vect = [0]*len(vocabulary)
@@ -13,7 +14,7 @@ def get_doc_vector(words,vocabulary):
     return doc_vect
 
 def parse_line(line):
-    cls = line.split(",")[-1].strip()
+    cls = line.split(",")[0].strip()
     content = ",".join(line.split(","))[:-1]
     word_vect = [word.lower() for word in re.split(r"\W+",content) if word]
     return word_vect,cls
@@ -27,21 +28,22 @@ def parse_file(filename):
                 vocabulary.extend(word_vect)
                 word_vects.append(word_vect)
                 classes.append(cls)
-                vocabulary = list(set(vocabulary))
+
+    vocabulary = list(set(vocabulary))
     return vocabulary, word_vects,classes
 
-def train(self,dataset,classes):
+def train(dataset,classes):
     sub_dataset = collections.defaultdict(lambda :[])
     cls_cnt = collections.defaultdict(lambda :0)
+    print zip(dataset,classes)
     for doc_vect,cls in zip(dataset,classes):
-        sub_dataset.append(doc_vect)
-        cls_cnt[cls] +=1
+        sub_dataset[cls].append(doc_vect)
+        cls_cnt[cls] += 1
 
-    cls_probs = {k:v/len(classes) for k,v in cls_cnt.items()}
+    cls_probs = {k: float(v)/len(classes) for k, v in cls_cnt.items()}
 
     cond_probs ={}
     dataset = np.array(dataset)
-
     for cls, sub_dataset in sub_dataset.items():
         sub_dataset = np.array(sub_dataset)
         cond_prob_vect = np.log((np.sum(sub_dataset,0)+1) / np.sum(dataset)+2)
@@ -49,7 +51,7 @@ def train(self,dataset,classes):
 
     return cond_probs,cls_probs
 
-def classify(self,doc_vect,cond_probs,cls_probs):
+def classify(doc_vect,cond_probs,cls_probs):
     pred_probs = {}
     for cls,cls_prob in cls_probs.items():
         cond_prob_vect = cond_probs[cls]
@@ -59,6 +61,24 @@ def classify(self,doc_vect,cond_probs,cls_probs):
 
 if __name__=="__main__":
     vocabulary,word_vects,classes = parse_file("sms.text")
-    print vocabulary,word_vects,classes
-    doc_vect = get_doc_vector(word_vects[1],vocabulary)
-    print doc_vect
+    print vocabulary
+    print word_vects
+    print classes
+    dataset = []
+    for word_vect in word_vects:
+        doc_vect = get_doc_vector(word_vect,vocabulary)
+        dataset.append(doc_vect)
+    print dataset
+    cond_probs,cls_probs = train(dataset,classes)
+    print cond_probs
+    print cls_probs
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    for cls, probs in cond_probs.items():
+        ax.scatter(np.arange(0,len(probs)),
+                   probs*cls_probs[cls],
+                   label=cls,
+                   alpha=0.3)
+        ax.legend()
+    plt.show()
