@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: UTF-8 -*-
 
 import re
 import collections
@@ -46,7 +47,7 @@ def train(dataset,classes):
     dataset = np.array(dataset)
     for cls, sub_dataset in sub_dataset.items():
         sub_dataset = np.array(sub_dataset)
-        cond_prob_vect = np.log((np.sum(sub_dataset,0)+1) / np.sum(dataset)+2)
+        cond_prob_vect = np.log((np.sum(sub_dataset,0)+1.0) / np.sum(dataset)+2)
         cond_probs[cls] = cond_prob_vect
 
     return cond_probs,cls_probs
@@ -56,7 +57,18 @@ def classify(doc_vect,cond_probs,cls_probs):
     for cls,cls_prob in cls_probs.items():
         cond_prob_vect = cond_probs[cls]
         pred_probs[cls] = np.sum(cond_prob_vect * doc_vect) + np.log(cls_prob)
-    return max(pred_probs,pred_probs.get())
+    return max(pred_probs,key=pred_probs.get)
+
+def chart_show(cond_probs, cls_probs):
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    for cls, probs in cond_probs.items():
+        ax.scatter(np.arange(0,len(probs)),
+               probs*cls_probs[cls],
+               label=cls,
+               alpha=0.3)
+        ax.legend()
+    plt.show()
 
 
 if __name__=="__main__":
@@ -73,12 +85,11 @@ if __name__=="__main__":
     print cond_probs
     print cls_probs
 
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    for cls, probs in cond_probs.items():
-        ax.scatter(np.arange(0,len(probs)),
-                   probs*cls_probs[cls],
-                   label=cls,
-                   alpha=0.3)
-        ax.legend()
-    plt.show()
+    #测试文本
+    test_word_vect,cls =parse_line("love is weakness")
+    test_word_data = get_doc_vector(test_word_vect,vocabulary)
+    print test_word_data
+    pred_cls = classify(test_word_data,cond_probs,cls_probs)
+    print pred_cls
+
+    chart_show(cond_probs,cls_probs)
