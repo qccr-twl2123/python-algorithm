@@ -40,7 +40,7 @@ def train(dataset,classes):
     for doc_vect,cls in zip(dataset,classes):
         sub_dataset[cls].append(doc_vect)
         cls_cnt[cls] += 1
-
+    print sub_dataset
     cls_probs = {k: float(v)/len(classes) for k, v in cls_cnt.items()}
 
     cond_probs ={}
@@ -72,7 +72,7 @@ def chart_show(cond_probs, cls_probs):
 
 
 if __name__=="__main__":
-    vocabulary,word_vects,classes = parse_file("sms.text")
+    vocabulary,word_vects,classes = parse_file("demo.text")
     print vocabulary
     print word_vects
     print classes
@@ -84,12 +84,12 @@ if __name__=="__main__":
     cond_probs,cls_probs = train(dataset,classes)
     print cond_probs
     print cls_probs
-
-    #测试文本
-    test_word_vect,cls =parse_line("love is weakness")
-    test_word_data = get_doc_vector(test_word_vect,vocabulary)
-    print test_word_data
-    pred_cls = classify(test_word_data,cond_probs,cls_probs)
-    print pred_cls
-
-    chart_show(cond_probs,cls_probs)
+    #
+    # #测试文本
+    # test_word_vect,cls =parse_line("love is weakness")
+    # test_word_data = get_doc_vector(test_word_vect,vocabulary)
+    # print test_word_data
+    # pred_cls = classify(test_word_data,cond_probs,cls_probs)
+    # print pred_cls
+    #
+    # chart_show(cond_probs,cls_probs)
