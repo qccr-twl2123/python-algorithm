@@ -1,22 +1,14 @@
 #!/usr/bin/python
 import collections
+import numpy as np
 
 list = ["asa","mmm","dadsa"];
 doc_vect =[0] * len(list)
-print doc_vect
+# print doc_vect
 
 
+a=[1,4,8,10,12]
+print  np.max(a)
+print  np.average(a)
 
 
-s = 'mississippi'
-d = collections.defaultdict(int)
-for k in s:
-    d[k] += 1
-print(d)
-
-sub_datasets = collections.defaultdict(lambda :[]);
-
-for i in range(1,10):
-   sub_datasets["ad"].append(10)
-
-print  sub_datasets
