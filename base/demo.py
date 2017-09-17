@@ -11,4 +11,8 @@ a=[1,4,8,10,12]
 print  np.max(a)
 print  np.average(a)
 
+list1=['for', 'normal', 'this', 'text', 'is', 'nroma', 'nromal', 'test', 'the', 'your']
+set1 = set(list1)
+print  set1
+
 

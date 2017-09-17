@@ -15,7 +15,7 @@ def get_doc_vector(words,vocabulary):
     return doc_vect
 
 def parse_line(line):
-    cls = line.split(",")[0].strip()
+    cls = line.split(",")[-1].strip()
     content = ",".join(line.split(","))[:-1]
     word_vect = [word.lower() for word in re.split(r"\W+",content) if word]
     return word_vect,cls
@@ -73,7 +73,7 @@ def chart_show(cond_probs, cls_probs):
 
 
 if __name__=="__main__":
-    vocabulary,word_vects,classes = parse_file("demo.text")
+    vocabulary,word_vects,classes = parse_file("english.txt")
     print vocabulary
     print word_vects
     print classes
@@ -87,7 +87,7 @@ if __name__=="__main__":
     print cls_probs
 
     #测试文本
-    test_word_vect,cls =parse_line("normal is normal")
+    test_word_vect,cls =parse_line("Anything lor,ham")
     test_word_data = get_doc_vector(test_word_vect,vocabulary)
     print test_word_data
     pred_cls = classify(test_word_data,cond_probs,cls_probs)
